@@ -1,0 +1,34 @@
+@use '../abstracts' as *;
+
+.horizontal-scroll-wrapper {
+  width: 100%;
+  overflow: hidden;
+}
+
+.horizontal-scroll-content {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: scroll;
+  // scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  /* Verbergt de scrollbar in Firefox */
+  -ms-overflow-style: none;
+  /* Verbergt de scrollbar in IE/Edge */
+}
+
+.horizontal-scroll-content .portfolio1_item {
+  scroll-snap-align: start;
+}
+
+/* Voor WebKit browsers (Chrome, Safari) */
+.horizontal-scroll-content::-webkit-scrollbar {
+  display: none;
+}
+
+.horizontal-scroll-content:last-child {
+  padding-right: 5%;
+}
+
+.horizontal-scroll-content:first-child {
+  padding-left: 5vw;
+}

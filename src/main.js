@@ -1,6 +1,8 @@
 import './scss/app.scss';
 import customAnimations from './features/animations/animations';
 import changesOnBreakpoints from './features/breakpoints';
+import horizontalScroll from './features/horizontalscroll';
 
 customAnimations();
 changesOnBreakpoints();
+horizontalScroll();
