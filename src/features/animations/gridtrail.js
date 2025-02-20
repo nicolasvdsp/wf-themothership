@@ -1,5 +1,7 @@
 import p5 from 'p5';
 
+const container = document.querySelector("[data-feature='grid-trail']");
+
 function backgroundGridTrail() {
   new p5((grid) => {
     const CELL_SIZE = 40;
@@ -18,76 +20,78 @@ function backgroundGridTrail() {
     let currentRow = -1;
     let currentCol = -1;
     let allNeighbors = [];
-    const container = document.querySelector("[data-feature='grid-trail']");
-
 
     grid.setup = () => {
-
       if (container) {
-
         let cnv = grid.createCanvas(container.offsetWidth, container.offsetHeight);
         cnv.parent(container);
         colorWithAlpha = grid.color(COLOR_R, COLOR_G, COLOR_B, STARTING_ALPHA);
         grid.noFill();
         grid.stroke(colorWithAlpha);
         grid.strokeWeight(STROKE_WEIGHT);
-        numRows = Math.ceil(container.offsetWidth / CELL_SIZE);
-        numCols = Math.ceil(container.offsetHeight / CELL_SIZE);
-
+        numCols = Math.ceil(grid.width / CELL_SIZE);  // Gebruik grid.width en grid.height hier
+        numRows = Math.ceil(grid.height / CELL_SIZE);
       } else {
-        console.log(container + "niet gevonden");
+        console.log(container + " niet gevonden");
       }
-    }
+    };
 
     grid.draw = () => {
       grid.background(BACKGROUND_COLOR);
-      //change stroke color for default background grid
-      grid.stroke(238, 59, 23, 30);
-      let row = grid.floor(grid.mouseY / CELL_SIZE);
-      let col = grid.floor(grid.mouseX / CELL_SIZE);
 
+      // Change stroke color for default background grid
+      grid.stroke(238, 59, 23, 30);
+
+      // Herteken het volledige grid gebaseerd op de actuele canvasgrootte
       for (let row = 0; row < numRows; row++) {
         for (let col = 0; col < numCols; col++) {
           let x = col * CELL_SIZE;
           let y = row * CELL_SIZE;
-          grid.rect(x, y, CELL_SIZE, CELL_SIZE)
+          grid.rect(x, y, CELL_SIZE, CELL_SIZE);
         }
       }
 
-      // check if mouse had moved to a different cell
-      // if yes, getRandomNeighbors to display
-      if (row !== currentRow || col !== currentCol) {
-        currentCol = col;
-        currentRow = row;
+      // Bepaal de huidige cel waar de muis zich in bevindt
+      let row = grid.floor(grid.mouseY / CELL_SIZE);
+      let col = grid.floor(grid.mouseX / CELL_SIZE);
 
-        allNeighbors.push(...getRandomNeighbors(row, col, numRows, numCols, PROB_OF_NEIGHBOR, STARTING_ALPHA));
+      // Controleer of muis zich binnen het canvas bevindt
+      if (row >= 0 && row < numRows && col >= 0 && col < numCols) {
+        if (row !== currentRow || col !== currentCol) {
+          currentCol = col;
+          currentRow = row;
+
+          allNeighbors.push(...getRandomNeighbors(row, col, numRows, numCols, PROB_OF_NEIGHBOR, STARTING_ALPHA));
+        }
+
+        // Highlight de cel waar de muis zich bevindt
+        let x = col * CELL_SIZE;
+        let y = row * CELL_SIZE;
+        grid.stroke(colorWithAlpha);
+        grid.rect(x, y, CELL_SIZE, CELL_SIZE);
       }
 
-      let x = col * CELL_SIZE;
-      let y = row * CELL_SIZE;
-
-      grid.stroke(colorWithAlpha);
-      grid.rect(x, y, CELL_SIZE, CELL_SIZE);
-
+      // Teken de oplichtende buren en fade ze uit
       for (let neighbor of allNeighbors) {
         let neighborX = neighbor.col * CELL_SIZE;
         let neighborY = neighbor.row * CELL_SIZE;
 
-        neighbor.opacity = grid.max(0, neighbor.opacity - AMT_FADE_PER_FRAME)
+        neighbor.opacity = grid.max(0, neighbor.opacity - AMT_FADE_PER_FRAME);
         grid.stroke(COLOR_R, COLOR_G, COLOR_B, neighbor.opacity);
         grid.rect(neighborX, neighborY, CELL_SIZE, CELL_SIZE);
       }
 
+      // Verwijder buren die volledig zijn uitgevaagd
       allNeighbors = allNeighbors.filter((neighbor) => neighbor.opacity > 0);
-    }
+    };
 
-
+    // Zorg ervoor dat canvas en grid up-to-date blijven bij een window resize
     grid.windowResized = () => {
       grid.resizeCanvas(container.offsetWidth, container.offsetHeight);
-      numRows = Math.ceil(container.offsetWidth / CELL_SIZE);
-      numCols = Math.ceil(container.offsetHeight / CELL_SIZE);
+      numCols = Math.ceil(grid.width / CELL_SIZE);
+      numRows = Math.ceil(grid.height / CELL_SIZE);
     };
-  })
+  });
 }
 
 function getRandomNeighbors(row, col, numRows, numCols, probOfNeighbor, startingAlpha) {
@@ -120,6 +124,7 @@ function getRandomNeighbors(row, col, numRows, numCols, probOfNeighbor, starting
 }
 
 function gridtrail() {
+  if (!container) return;
   backgroundGridTrail();
 }
 
