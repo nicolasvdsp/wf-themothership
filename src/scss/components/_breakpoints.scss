@@ -1,1 +1,14 @@
 @use '../abstracts' as *;
+
+
+@include breakpoint-between(1330px) {
+
+  .contact_contact-list {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+
+    [data-breakpoint="span"] {
+      grid-column: span 2;
+      order: 9;
+    }
+  }
+}

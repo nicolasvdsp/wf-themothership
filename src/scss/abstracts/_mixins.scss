@@ -1,0 +1,55 @@
+$tablet: 991px;
+$m-landscape: 767px;
+$m-portrait: 479px;
+
+@mixin breakpoint($point) {
+  @if $point ==tablet {
+    @media (max-width: $tablet) {
+      @content;
+    }
+  }
+
+  @else if $point ==m-landscape {
+    @media (max-width: $m-landscape) {
+      @content;
+    }
+  }
+
+  @else if $point ==m-portrait {
+    @media (max-width: $m-portrait) {
+      @content;
+    }
+  }
+
+  @else {
+    @media (max-width: $point) {
+      @content;
+    }
+  }
+}
+
+@mixin breakpoint-between($max, $min: null) {
+  @if($min) {
+    @media (min-width: $min) and (max-width: $max) {
+      @content;
+    }
+  }
+
+  @else if $max >$tablet {
+    @media (min-width: $tablet) and (max-width: $max) {
+      @content;
+    }
+  }
+
+  @else if $max >$m-landscape {
+    @media (min-width: $m-landscape) and (max-width: $max) {
+      @content;
+    }
+  }
+
+  @else if $max >$m-portrait {
+    @media (min-width: $m-portrait) and (max-width: $max) {
+      @content;
+    }
+  }
+}
