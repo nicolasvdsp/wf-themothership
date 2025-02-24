@@ -1,0 +1,59 @@
+@use '../abstracts' as *;
+
+
+
+.contact_item {
+  &::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(1);
+    transform-origin: center;
+    width: 100%;
+    height: 100%;
+    border-radius: 1.1rem;
+    background-color: $black;
+    z-index: -1;
+    border: 1px solid $solarflare-base;
+    transition: border 200ms ease-out, box-shadow 200ms ease-out, transform 100ms ease-out;
+  }
+
+  &:hover::after {
+    border: 1px solid $solarflare-tint1;
+    box-shadow: 0px 0px 4px 0px rgba(238, 59, 23, 0.30), 0px 0px 16px 0px rgba(238, 59, 23, 0.30), 0px 0px 64px 0px rgba(238, 59, 23, 0.30);
+    transform: translate(-50%, -50%) scale(0.99);
+  }
+}
+
+
+// .contact_itemm {
+//   position: relative;
+
+//   :hover {}
+
+//   :after {
+//     content: '';
+//     transition: box-shadow 200ms ease;
+//     position: absolute;
+//     left: 50%;
+//     top: 50%;
+//     transform: translate(-50%, -50%);
+//     width: 100%;
+//     height: 100%;
+//     box-shadow: inset 0 0 0 0px $solarflare-base, 0 0 0 0px $solarflare-base;
+//     background-color: darkblue;
+//     filter: blur(1px);
+//     /* Binnenste schaduw (inset) van 1px */
+//     // border: 1px solid $solarflare-base;
+//     border-radius: .9rem;
+//   }
+
+//   :hover::after {
+//     box-shadow: inset 0 0 2px 1px $solarflare-base, 0 0 2px 1px $solarflare-base;
+//     /* Binnenste schaduw (inset) van 1px */
+//     // border-width: 2px;
+//     filter: blur(10px);
+//     background-color: $solarflare-subtlebg;
+//   }
+// }
