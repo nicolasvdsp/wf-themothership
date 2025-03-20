@@ -3,12 +3,10 @@ import customAnimations from './features/animations/animations';
 import changesOnBreakpoints from './features/breakpoints';
 import horizontalScroll from './features/horizontalscroll';
 import imagesequence from './features/imagesequence';
-import gridtrail from './features/animations/gridtrail';
 import contact from './features/contact';
 
 customAnimations();
 changesOnBreakpoints();
 horizontalScroll();
 imagesequence();
-gridtrail();
 contact();
