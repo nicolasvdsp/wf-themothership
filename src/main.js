@@ -10,3 +10,9 @@ changesOnBreakpoints();
 horizontalScroll();
 imagesequence();
 contact();
+
+if (import.meta.env.DEV) {
+  console.log("In development");
+} else {
+  console.log("Flux Capacitator engaged 🚀");
+}
