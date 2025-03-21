@@ -66,7 +66,7 @@ function alianAnimation() {
         // Na 3 seconden terugzetten
         gsap.to(alian, {
           duration: 0.5,
-          delay: 3, // Wacht 3 seconden
+          delay: 1.5, // Wacht 1.5 seconden
           x: 0,
           y: 0,
           rotation: 0,
@@ -80,10 +80,10 @@ function alianAnimation() {
       rotate: 15,
       ease: "back.out", // Bouncy effect bij het einde
       onComplete: () => {
-        // Na 3 seconden terugzetten
+        // Na 1.5 seconden terugzetten
         gsap.to(folder, {
           duration: 0.5,
-          delay: 3, // Wacht 3 seconden
+          delay: 1.5, // Wacht 3 seconden
           rotate: 0,
           ease: "power2.inOut"
         });
