@@ -2,6 +2,7 @@ import { gsap } from 'gsap';
 import { SplitText } from 'gsap/SplitText';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ScrambleTextPlugin } from 'gsap/ScrambleTextPlugin';
+import { CustomBounce } from 'gsap/CustomBounce';
 import { CustomEase } from 'gsap/CustomEase';
 
 gsap.registerPlugin(ScrollTrigger, SplitText, ScrambleTextPlugin, CustomEase);
@@ -46,8 +47,54 @@ function initScrambleOnHover() {
 }
 
 
+
+//H1 ICON ANIMATIONS
+function alianAnimation() {
+  const folder = document.querySelector(".icon-folder");
+  const alian = folder.querySelector('[data-icon-type="alian"]');
+
+  console.log(folder + " " + alian);
+  folder.addEventListener("click", function () {
+    gsap.to(alian, {
+      duration: .6,
+      x: 20,  // Beweeg naar rechts
+      y: -40, // Beweeg omhoog
+      rotation: 135, // Volledige draai
+      scale: 1.5, // 1.5 keer groter
+      ease: "back.out", // Bouncy effect bij het einde
+      onComplete: () => {
+        // Na 3 seconden terugzetten
+        gsap.to(alian, {
+          duration: 0.5,
+          delay: 3, // Wacht 3 seconden
+          x: 0,
+          y: 0,
+          rotation: 0,
+          scale: 1,
+          ease: "power2.inOut"
+        });
+      }
+    })
+    gsap.to(folder, {
+      duration: .6,
+      rotate: 15,
+      ease: "back.out", // Bouncy effect bij het einde
+      onComplete: () => {
+        // Na 3 seconden terugzetten
+        gsap.to(folder, {
+          duration: 0.5,
+          delay: 3, // Wacht 3 seconden
+          rotate: 0,
+          ease: "power2.inOut"
+        });
+      }
+    })
+  })
+}
+
 function allGsapAnimations() {
   initScrambleOnHover()
+  alianAnimation()
 }
 
 export default allGsapAnimations;
