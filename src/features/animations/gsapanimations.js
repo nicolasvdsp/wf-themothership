@@ -51,6 +51,7 @@ function initScrambleOnHover() {
 //H1 ICON ANIMATIONS
 function alianAnimation() {
   const folder = document.querySelector(".icon-folder");
+  if (!folder) return;
   const alian = folder.querySelector('[data-icon-type="alian"]');
 
   console.log(folder + " " + alian);
