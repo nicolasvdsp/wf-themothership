@@ -97,7 +97,7 @@ function dragJoystick() {
 
   const joystick = document.querySelector('[data-icon-type="stick"]');
   if (joystick) {
-    const maxRotation = 15; // Max 15 graden naar links/rechts
+    const maxRotation = 25; // Max 15 graden naar links/rechts
     const centerX = window.innerWidth / 2; // Center van het scherm (horizontaal)
 
     // Zet de rotatie oorsprong (center-bottom)
