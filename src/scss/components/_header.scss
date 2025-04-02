@@ -45,13 +45,3 @@
     z-index: 5;
   }
 }
-
-.layout1_bg-gradient.is-tablet {
-  @include gradient-card();
-
-}
-
-.layout1_bg-blur.is-tablet {
-  @include gradient-card($filter: true);
-  // opacity: .5;
-}
