@@ -42,6 +42,16 @@
   [data-icon-type='coin'] {
     width: 4rem;
     max-width: none;
-    z-index: -5;
+    z-index: 5;
   }
+}
+
+.layout1_bg-gradient.is-tablet {
+  @include gradient-card();
+
+}
+
+.layout1_bg-blur.is-tablet {
+  @include gradient-card($filter: true);
+  // opacity: .5;
 }
