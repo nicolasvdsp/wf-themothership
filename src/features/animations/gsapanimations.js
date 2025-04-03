@@ -54,7 +54,6 @@ function alianAnimation() {
   if (!folder) return;
   const alian = folder.querySelector('[data-icon-type="alian"]');
 
-  console.log(folder + " " + alian);
   folder.addEventListener("click", function () {
     gsap.to(alian, {
       duration: .6,
