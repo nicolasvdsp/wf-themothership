@@ -62,7 +62,7 @@
 /* Tablet */
 @media (min-width: 768px) and (max-width: 991px) {
   [data-flickity-type="cases"] {
-    --flick-col: 2.5;
+    --flick-col: 2.1;
     --flick-gap: 1.5em;
   }
 
@@ -90,7 +90,7 @@
 /* Mobile */
 @media screen and (max-width: 767px) {
   [data-flickity-type="cases"] {
-    --flick-col: 1.5;
+    --flick-col: 2.1;
     --flick-gap: 1em;
   }
 
@@ -106,5 +106,12 @@
 
   [data-flickity-type="cases"]:is([data-flickity-count="1"]) [data-flickity-controls] {
     display: none;
+  }
+}
+
+@media screen and (max-width: 479px) {
+  [data-flickity-type="cases"] {
+    --flick-col: 1.2;
+    --flick-gap: 1em;
   }
 }
