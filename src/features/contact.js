@@ -17,7 +17,7 @@ function feedbackCopied() {
           msg.classList.remove('reveal-feedback-message');
           msg.style.transform = 'translateY(-4px)';
         }, 200);
-      }, 3000);
+      }, 1200);
     })
   });
 }
