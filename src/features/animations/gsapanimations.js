@@ -209,7 +209,9 @@ function initMarqueeScrollDirection() {
 }
 
 function allGsapAnimations() {
-  initScrambleOnHover()
+  if (window.matchMedia("(pointer: fine)").matches) {
+    initScrambleOnHover()
+  }
   alianAnimation()
   dragJoystick()
   initMarqueeScrollDirection();
