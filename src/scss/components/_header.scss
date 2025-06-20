@@ -12,9 +12,9 @@
   overflow: visible;
 
   &.icon-folder {
-    margin-right: -1rem;
-    margin-left: -.5rem;
-    transform: translateY(1.25rem);
+    margin-right: -.5ch;
+    margin-left: -.25ch;
+    transform: translateY(.5ch);
     width: 2.4ch;
     cursor: pointer;
   }
@@ -24,10 +24,10 @@
   }
 
   &.icon-joystick {
-    margin-right: -1.5rem;
-    margin-left: -1.2rem;
+    margin-right: -.6ch;
+    margin-left: -.7rem;
     width: 2ch;
-    transform: translateY(1.3rem);
+    transform: translateY(.5ch);
     // cursor: pointer;
   }
 
