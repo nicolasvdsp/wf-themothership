@@ -4,6 +4,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ScrambleTextPlugin } from 'gsap/ScrambleTextPlugin';
 import { CustomBounce } from 'gsap/CustomBounce';
 import { CustomEase } from 'gsap/CustomEase';
+import { compute } from 'three/tsl';
 
 gsap.registerPlugin(ScrollTrigger, SplitText, ScrambleTextPlugin, CustomEase);
 
@@ -50,25 +51,32 @@ function initScrambleOnHover() {
 
 //H1 ICON ANIMATIONS
 function alianAnimation() {
-  const folder = document.querySelector(".icon-folder");
+  const folder = document.querySelector(".icon.icon-folder");
   if (!folder) return;
   const alian = folder.querySelector('[data-icon-type="alian"]');
 
+  gsap.set(alian, { xPercent: -50, yPercent: -50, x: 0, y: 0 }); // Center the icon
+
   folder.addEventListener("click", function () {
+    const iconFolderWidth = parseFloat(window.getComputedStyle(folder).width);
+    // const moveX = iconFolderWidth * 0.305; // ≈ 20px bij 4.1rem breedte
+    // const moveY = -iconFolderWidth * 0.61; // ≈ -40px bij 4.1rem breedte
+    const moveX = iconFolderWidth * 0.305; // ≈ 20px bij 4.1rem breedte
+    const moveY = -iconFolderWidth * 0.61; // ≈ -40px bij 4.1rem breedte
+
     gsap.to(alian, {
       duration: .6,
-      x: 20,  // Beweeg naar rechts
-      y: -40, // Beweeg omhoog
+      x: moveX,  // Beweeg naar rechts
+      y: moveY, // Beweeg omhoog
       rotation: 135, // Volledige draai
       scale: 1.5, // 1.5 keer groter
       ease: "back.out", // Bouncy effect bij het einde
       onComplete: () => {
-        // Na 3 seconden terugzetten
         gsap.to(alian, {
           duration: 0.5,
           delay: 1.5, // Wacht 1.5 seconden
-          x: 0,
-          y: 0,
+          x: 0, // Terug naar originele X-positie
+          y: 0, // Terug naar originele Y-positie
           rotation: 0,
           scale: 1,
           ease: "power2.inOut"
@@ -95,6 +103,8 @@ function alianAnimation() {
 function dragJoystick() {
 
   const joystick = document.querySelector('[data-icon-type="stick"]');
+  gsap.set(joystick, { xPercent: -50, yPercent: -50, x: 0, y: 0, rotation: 0 });
+
   if (joystick) {
     const maxRotation = 25; // Max 15 graden naar links/rechts
     const centerX = window.innerWidth / 2; // Center van het scherm (horizontaal)
