@@ -15,6 +15,7 @@ function initScrambleOnHover() {
     let textEl = target.querySelector('[data-scramble-hover="target"]')
     let originalText = textEl.textContent // save original text
     let customHoverText = textEl.getAttribute("data-scramble-text") // if this attribute is present, take a custom hover text
+    let customHoverTextTemp = !!textEl.hasAttribute("data-scramble-text-temp"); // !! turns let in boolean, based on statement
     let scrambleChars = originalText.replace(/\s/g, '');
 
     let split = new SplitText(textEl, {
@@ -25,6 +26,9 @@ function initScrambleOnHover() {
 
 
     target.addEventListener("mouseenter", () => {
+      customHoverTextTemp ? customHoverText = textEl.getAttribute("data-scramble-text") : null;
+      console.log("temp is " + customHoverTextTemp);
+      console.log(customHoverText);
       gsap.to(textEl, {
         duration: 1,
         scrambleText: {
