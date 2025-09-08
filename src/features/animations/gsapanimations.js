@@ -59,49 +59,47 @@ function alianAnimation() {
   if (!folder) return;
   const alian = folder.querySelector('[data-icon-type="alian"]');
 
-  gsap.set(alian, { xPercent: -50, yPercent: -50, x: 0, y: 0 }); // Center the icon
+  gsap.set(alian, { xPercent: -50, yPercent: -50, x: 0, y: 0 });
+
+  let isOpen = false;
 
   folder.addEventListener("click", function () {
     const iconFolderWidth = parseFloat(window.getComputedStyle(folder).width);
-    // const moveX = iconFolderWidth * 0.305; // ≈ 20px bij 4.1rem breedte
-    // const moveY = -iconFolderWidth * 0.61; // ≈ -40px bij 4.1rem breedte
-    const moveX = iconFolderWidth * 0.305; // ≈ 20px bij 4.1rem breedte
-    const moveY = -iconFolderWidth * 0.61; // ≈ -40px bij 4.1rem breedte
+    const moveX = iconFolderWidth * 0.305;
+    const moveY = -iconFolderWidth * 0.61;
 
-    gsap.to(alian, {
-      duration: .6,
-      x: moveX,  // Beweeg naar rechts
-      y: moveY, // Beweeg omhoog
-      rotation: 135, // Volledige draai
-      scale: 1.5, // 1.5 keer groter
-      ease: "back.out", // Bouncy effect bij het einde
-      onComplete: () => {
-        gsap.to(alian, {
-          duration: 0.5,
-          delay: 1.5, // Wacht 1.5 seconden
-          x: 0, // Terug naar originele X-positie
-          y: 0, // Terug naar originele Y-positie
-          rotation: 0,
-          scale: 1,
-          ease: "power2.inOut"
-        });
-      }
-    })
-    gsap.to(folder, {
-      duration: .6,
-      rotate: 15,
-      ease: "back.out", // Bouncy effect bij het einde
-      onComplete: () => {
-        // Na 1.5 seconden terugzetten
-        gsap.to(folder, {
-          duration: 0.5,
-          delay: 1.5, // Wacht 3 seconden
-          rotate: 0,
-          ease: "power2.inOut"
-        });
-      }
-    })
-  })
+    if (!isOpen) {
+      gsap.to(alian, {
+        duration: .6,
+        x: moveX,
+        y: moveY,
+        rotation: 135,
+        scale: 1.5,
+        ease: "back.out"
+      });
+      gsap.to(folder, {
+        duration: .6,
+        rotate: 15,
+        ease: "back.out"
+      });
+      isOpen = true;
+    } else {
+      gsap.to(alian, {
+        duration: 0.5,
+        x: 0,
+        y: 0,
+        rotation: 0,
+        scale: 1,
+        ease: "power2.inOut"
+      });
+      gsap.to(folder, {
+        duration: 0.5,
+        rotate: 0,
+        ease: "power2.inOut"
+      });
+      isOpen = false;
+    }
+  });
 }
 
 function dragJoystick() {
